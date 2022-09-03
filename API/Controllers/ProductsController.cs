@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -10,8 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-
-    public class ProductsController : BaseAPIController
+    public class ProductsController : BaseApiController
     {
         private readonly StoreContext _context;
         public ProductsController(StoreContext context)
@@ -20,7 +20,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<PagedList<Product>>> GetProducts([FromQuery] ProductParams productParams)
+        public async Task<ActionResult<PagedList<Product>>> GetProducts([FromQuery]ProductParams productParams)
         {
             var query = _context.Products
                 .Sort(productParams.OrderBy)
@@ -28,7 +28,7 @@ namespace API.Controllers
                 .Filter(productParams.Brands, productParams.Types)
                 .AsQueryable();
 
-            var products = await PagedList<Product>.ToPagedList(query,
+            var products = await PagedList<Product>.ToPagedList(query, 
                 productParams.PageNumber, productParams.PageSize);
 
             Response.AddPaginationHeader(products.MetaData);

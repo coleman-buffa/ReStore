@@ -5,18 +5,17 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-#nullable disable
-
 namespace API.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20220807152051_BasketEntityAdded")]
+    [Migration("20210925064712_BasketEntityAdded")]
     partial class BasketEntityAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.7");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "5.0.8");
 
             modelBuilder.Entity("API.Entities.Basket", b =>
                 {

@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using API.Entities;
 
 namespace API.Extensions
@@ -10,7 +8,7 @@ namespace API.Extensions
     {
         public static IQueryable<Product> Sort(this IQueryable<Product> query, string orderBy)
         {
-            if (string.IsNullOrWhiteSpace(orderBy)) return query.OrderBy(p => p.Name);
+            if (string.IsNullOrEmpty(orderBy)) return query.OrderBy(p => p.Name); 
 
             query = orderBy switch
             {
@@ -36,19 +34,16 @@ namespace API.Extensions
             var brandList = new List<string>();
             var typeList = new List<string>();
 
-            if (!string.IsNullOrEmpty(brands)) {
+            if (!string.IsNullOrEmpty(brands))
                 brandList.AddRange(brands.ToLower().Split(",").ToList());
-            }
 
-            if (!string.IsNullOrEmpty(types)) {
+            if (!string.IsNullOrEmpty(types))
                 typeList.AddRange(types.ToLower().Split(",").ToList());
-            }
 
             query = query.Where(p => brandList.Count == 0 || brandList.Contains(p.Brand.ToLower()));
             query = query.Where(p => typeList.Count == 0 || typeList.Contains(p.Type.ToLower()));
 
             return query;
-
         }
     }
 }

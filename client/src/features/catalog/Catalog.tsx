@@ -26,8 +26,7 @@ export default function Catalog() {
 
     useEffect(() => {
         if (!filtersLoaded) dispatch(fetchFilters());
-
-    }, [dispatch, filtersLoaded])
+    }, [filtersLoaded, dispatch]);
 
     if (!filtersLoaded) return <LoadingComponent message='Loading products...' />
 
@@ -37,8 +36,6 @@ export default function Catalog() {
                 <Paper sx={{ mb: 2 }}>
                     <ProductSearch />
                 </Paper>
-
-                {/* Sorting */}
                 <Paper sx={{ mb: 2, p: 2 }}>
                     <RadioButtonGroup
                         selectedValue={productParams.orderBy}
@@ -46,8 +43,6 @@ export default function Catalog() {
                         onChange={(e) => dispatch(setProductParams({ orderBy: e.target.value }))}
                     />
                 </Paper>
-
-                {/* Brands */}
                 <Paper sx={{ mb: 2, p: 2 }}>
                     <CheckboxButtons
                         items={brands}
@@ -55,8 +50,6 @@ export default function Catalog() {
                         onChange={(items: string[]) => dispatch(setProductParams({ brands: items }))}
                     />
                 </Paper>
-
-                {/* Types */}
                 <Paper sx={{ mb: 2, p: 2 }}>
                     <CheckboxButtons
                         items={types}
@@ -64,19 +57,18 @@ export default function Catalog() {
                         onChange={(items: string[]) => dispatch(setProductParams({ types: items }))}
                     />
                 </Paper>
-
             </Grid>
             <Grid item xs={9}>
                 <ProductList products={products} />
             </Grid>
             <Grid item xs={3} />
-            <Grid item xs={9} sx={{ mb: 2 }} >
+            <Grid item xs={9} sx={{mb: 2}}>
                 {metaData &&
-                <AppPagination
+                <AppPagination 
                     metaData={metaData}
-                    onPageChange={(page: number) => dispatch(setPageNumber({ pageNumber: page }))}
+                    onPageChange={(page: number) => dispatch(setPageNumber({pageNumber: page}))}
                 />}
             </Grid>
-        </Grid >
+        </Grid>
     )
 }
