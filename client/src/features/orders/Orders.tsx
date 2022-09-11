@@ -36,7 +36,7 @@ export default function Orders() {
                         <TableCell>Order Number</TableCell>
                         <TableCell align="right">Total</TableCell>
                         <TableCell align="right">Order Date</TableCell>
-                        <TableCell align="right">Order StatusCarbs</TableCell>
+                        <TableCell align="right">Order Status</TableCell>
                         <TableCell align="right"></TableCell>
                     </TableRow>
                 </TableHead>
